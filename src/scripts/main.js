@@ -76,31 +76,62 @@ const students = [{
 
 const studentContainer = document.querySelector("#container");
 
-const createStudentComponent = (name, subject, info, h1Class) => {
-    return `
-        <div class="student">
-            <h1 class= "xx-large ${h1Class}">${name}</h1>
-            <section class="bordered dashed section--padded">${subject}</section>
-            <aside class="pushRight">${info}</aside>
+// const createStudentComponent = (name, subject, info, h1Class) => {
+//     return `
+//         <div class="student">
+//             <h1 class= "xx-large ${h1Class}">${name}</h1>
+//             <section class="bordered dashed section--padded">${subject}</section>
+//             <aside class="pushRight">${info}</aside>
+//         </div>
+//     `
+// }
+
+// for (let i = 0; i < students.length; i++) {
+//     let student = students[i];
+//     if (student.score >= 60) {
+//         studentContainer.innerHTML += createStudentComponent(
+//             student.name,
+//             student.subject,
+//             student.info,
+//             "passing",
+//         )
+//     } else {
+//         studentContainer.innerHTML += createStudentComponent(
+//             student.name,
+//             student.subject,
+//             student.info,
+//             "failing"
+//         )
+//     }
+// }
+
+
+// Instead of defining four arguments for the createStudentComponent function, and then passing the individual properties when it is invoked, refactor the function to accept the entire object as a single argument.
+// Then refactor your string interpolation code to use the object properties.
+
+const createStudentComponent = (students) => {
+    if (students.score >= 60) {
+        return `
+            <div class="student">
+                <h1 class= "xx-large passing">${students.name}</h1>
+                <section class="bordered dashed section--padded">${students.subject}</section>
+                <aside class="pushRight">${students.info}</aside>
+            </div>
+        `
+    } else {
+        return `
+            <div class="student">
+            <h1 class= "xx-large failing">${students.name}</h1>
+            <section class="bordered dashed section--padded">${students.subject}</section>
+            <aside class="pushRight">${students.info}</aside>
         </div>
-    `
+            `
+    }
+
 }
 
 for (let i = 0; i < students.length; i++) {
-    let student = students[i];
-    if (student.score >= 60) {
-        studentContainer.innerHTML += createStudentComponent(
-            student.name,
-            student.subject,
-            student.info,
-            "passing",
-        )
-    } else {
-        studentContainer.innerHTML += createStudentComponent(
-            student.name,
-            student.subject,
-            student.info,
-            "failing"
-        )
-    }
+    // let student = students[i];
+    // if (students[i].score >= 60) {
+    studentContainer.innerHTML += createStudentComponent(students[i]);
 }
