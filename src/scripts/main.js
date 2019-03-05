@@ -109,29 +109,104 @@ const studentContainer = document.querySelector("#container");
 // Instead of defining four arguments for the createStudentComponent function, and then passing the individual properties when it is invoked, refactor the function to accept the entire object as a single argument.
 // Then refactor your string interpolation code to use the object properties.
 
-const createStudentComponent = (students) => {
-    if (students.score >= 60) {
-        return `
-            <div class="student">
-                <h1 class= "xx-large passing">${students.name}</h1>
-                <section class="bordered dashed section--padded">${students.subject}</section>
-                <aside class="pushRight">${students.info}</aside>
-            </div>
-        `
-    } else {
-        return `
-            <div class="student">
-            <h1 class= "xx-large failing">${students.name}</h1>
-            <section class="bordered dashed section--padded">${students.subject}</section>
-            <aside class="pushRight">${students.info}</aside>
-        </div>
-            `
-    }
+// const createStudentComponent = (students) => {
+//     if (students.score >= 60) {
+//         return `
+//             <div class="student">
+//                 <h1 class= "xx-large passing">${students.name}</h1>
+//                 <section class="bordered dashed section--padded">${students.subject}</section>
+//                 <aside class="pushRight">${students.info}</aside>
+//             </div>
+//         `
+//     } else {
+//         return `
+//             <div class="student">
+//             <h1 class= "xx-large failing">${students.name}</h1>
+//             <section class="bordered dashed section--padded">${students.subject}</section>
+//             <aside class="pushRight">${students.info}</aside>
+//         </div>
+//             `
+//     }
 
+// }
+
+// for (let i = 0; i < students.length; i++) {
+//     // let student = students[i];
+//     // if (students[i].score >= 60) {
+//     studentContainer.innerHTML += createStudentComponent(students[i]);
+// }
+
+
+// Write functions that build the sub-components of the larger student component.
+
+// h1
+// section
+// aside
+// Invoke those functions inside the createStudentComponent function to build the parent <div>.
+// const createHeader = (name) => {
+//     return `
+//     <h1 class="xx-large">${name}</h1>
+//     `
+// };
+
+// const createSection = (subject) => {
+//     return `
+//     <section class="bordered dashed section--padded">${subject}</section>
+//     `
+// };
+
+// const createAside = (info) => {
+//     return `
+//     <aside class="pushRight">${info}</aside>  `
+// };
+
+// const createStudentComponent = (student) =>  `
+//     <div id="student">
+//         ${createHeader(student.name)}
+//         ${createSection(student.subject)}
+//         ${createAside(student.info)}
+//     </div>  
+//       `
+
+// for (let i = 0; i < students.length; i++) {
+//     let student = students[i];
+//     // if (student.score >= 60) {
+//         studentContainer.innerHTML += createStudentComponent(student);
+//     }
+//     // }
+
+
+// Create one function that will generate any HTML component, with any content. It should be defined with three arguments.
+
+// The type of HTML component to make
+// The content of the component
+// The value of the class attribute
+
+const createComponent = (type, content, className) => {
+    return `<${type} class = "${className}"> ${content} </${type}>`
+    // studentContainer.innerHTML += createComponent(type, className, content);
 }
 
+
+const createStudentComponent = (student) => `
+    <div id="student">
+        ${createComponent("h1", student.name, "xx-large passing")}
+        ${createComponent("section", student.subject, "bordered dashed section--padded")}
+        ${createComponent("aside", student.info, "pushRight")}
+    </div>
+`
 for (let i = 0; i < students.length; i++) {
-    // let student = students[i];
-    // if (students[i].score >= 60) {
-    studentContainer.innerHTML += createStudentComponent(students[i]);
+    let student = students[i];
+
+    studentContainer.innerHTML += createStudentComponent(student);
 }
+// }
+// CLASS NOTES
+
+// const createStudentComponent = (name, info, subject, className) => {
+//     let studentDiv = document.createElement("div");
+//     let studentH1 = document.createElement("h1");
+//     let studentSection = document.createElement("section");
+//     let studentAside = document.createElement("aside")
+//     console.log("div", studentDiv);
+// }
